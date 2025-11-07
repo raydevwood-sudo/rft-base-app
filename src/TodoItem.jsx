@@ -1,5 +1,6 @@
 // src/TodoItem.jsx
 import React from 'react';
+import { FaTrash } from 'react-icons/fa'; // Trash icon
 
 const TodoItem = ({ todo, onToggle, onDelete }) => {
   
@@ -34,9 +35,10 @@ const TodoItem = ({ todo, onToggle, onDelete }) => {
       </div>
       <button
         onClick={onDelete}
-        className="text-red-500 hover:text-red-700 transition duration-150"
+        className="text-red-500 hover:text-red-700 transition duration-150 p-2 rounded-full hover:bg-red-100"
+        aria-label="Delete todo" // Added for accessibility
       >
-        Delete
+        <FaTrash /> 
       </button>
     </li>
   );
