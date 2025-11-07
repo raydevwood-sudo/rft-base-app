@@ -35,14 +35,20 @@ function App() {
     }
   }, [user]); // Rerun when user object changes
 
-  const addTodo = async (text) => {
+  const addTodo = async (text, dueDate = null) => {
     if (user) {
-      await addDoc(collection(db, "todos"), {
-        text,
-        completed: false,
-        userId: user.uid, // CRITICAL: Link the todo to the user ID
-        createdAt: new Date(),
-      });
+      try {
+        await addDoc(collection(db, "todos"), {
+          text,
+          completed: false,
+          userId: user.uid, // Link the todo to the user ID
+          createdAt: new Date(),
+          dueDate: dueDate,
+        });
+      } catch (error) {
+        console.error("Error adding document: ", error);
+        // You should add proper error handling UI here
+      }
     }
   };
 
